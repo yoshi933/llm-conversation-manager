@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Conversation Manager - Settings</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>LLM Conversation Manager</h1>
+            <p class="subtitle">Settings & Configuration</p>
+        </header>
+
+        <nav class="settings-tabs">
+            <button class="tab-button active" data-tab="api-keys">
+                <span class="tab-icon">🔑</span>
+                API Keys
+            </button>
+            <button class="tab-button" data-tab="preferences">
+                <span class="tab-icon">⚙️</span>
+                Preferences
+            </button>
+            <button class="tab-button" data-tab="extension">
+                <span class="tab-icon">🔧</span>
+                Extension Config
+            </button>
+            <button class="tab-button" data-tab="about">
+                <span class="tab-icon">ℹ️</span>
+                About
+            </button>
+        </nav>
+
+        <main class="settings-content">
+            <!-- API Keys Tab -->
+            <section id="api-keys" class="tab-content active">
+                <h2>API Key Management</h2>
+                <p class="section-description">Securely store and manage your API keys for various LLM services.</p>
+
+                <div class="api-key-section">
+                    <h3>OpenAI API Key</h3>
+                    <div class="form-group">
+                        <label for="openai-key">API Key</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="openai-key" class="api-key-input" placeholder="sk-..." data-service="openai">
+                            <button class="toggle-visibility" data-target="openai-key">👁️</button>
+                        </div>
+                        <small>Your API key is stored locally and never sent to our servers</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="openai-model">Default Model</label>
+                        <select id="openai-model" class="model-select" data-service="openai">
+                            <option value="gpt-4">GPT-4</option>
+                            <option value="gpt-4-turbo">GPT-4 Turbo</option>
+                            <option value="gpt-3.5-turbo" selected>GPT-3.5 Turbo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="api-key-section">
+                    <h3>Anthropic API Key</h3>
+                    <div class="form-group">
+                        <label for="anthropic-key">API Key</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="anthropic-key" class="api-key-input" placeholder="sk-ant-..." data-service="anthropic">
+                            <button class="toggle-visibility" data-target="anthropic-key">👁️</button>
+                        </div>
+                        <small>Your API key is stored locally and never sent to our servers</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="anthropic-model">Default Model</label>
+                        <select id="anthropic-model" class="model-select" data-service="anthropic">
+                            <option value="claude-3-opus">Claude 3 Opus</option>
+                            <option value="claude-3-sonnet" selected>Claude 3 Sonnet</option>
+                            <option value="claude-3-haiku">Claude 3 Haiku</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="api-key-section">
+                    <h3>Google Gemini API Key</h3>
+                    <div class="form-group">
+                        <label for="gemini-key">API Key</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="gemini-key" class="api-key-input" placeholder="AIzaSy..." data-service="gemini">
+                            <button class="toggle-visibility" data-target="gemini-key">👁️</button>
+                        </div>
+                        <small>Your API key is stored locally and never sent to our servers</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="gemini-model">Default Model</label>
+                        <select id="gemini-model" class="model-select" data-service="gemini">
+                            <option value="gemini-pro" selected>Gemini Pro</option>
+                            <option value="gemini-pro-vision">Gemini Pro Vision</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="test-api-keys" class="btn btn-secondary">Test API Keys</button>
+                    <button id="clear-api-keys" class="btn btn-danger">Clear All Keys</button>
+                </div>
+            </section>
+
+            <!-- Preferences Tab -->
+            <section id="preferences" class="tab-content">
+                <h2>User Preferences</h2>
+                <p class="section-description">Customize your experience with LLM Conversation Manager.</p>
+
+                <div class="preference-group">
+                    <h3>Display Settings</h3>
+                    
+                    <div class="form-group">
+                        <label for="theme-select">Theme</label>
+                        <select id="theme-select">
+                            <option value="auto" selected>Auto (Follow System)</option>
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="font-size">Font Size</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="font-size" min="12" max="18" value="14" class="slider">
+                            <span class="slider-value">14px</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="enable-syntax-highlight" checked>
+                        <label for="enable-syntax-highlight">Enable Code Syntax Highlighting</label>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="enable-markdown" checked>
+                        <label for="enable-markdown">Render Markdown in Responses</label>
+                    </div>
+                </div>
+
+                <div class="preference-group">
+                    <h3>Conversation Settings</h3>
+
+                    <div class="form-group">
+                        <label for="auto-save-interval">Auto-Save Interval (seconds)</label>
+                        <input type="number" id="auto-save-interval" min="10" max="300" value="60" class="number-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="max-history">Maximum Conversation History</label>
+                        <input type="number" id="max-history" min="10" max="1000" value="100" class="number-input">
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="auto-scroll" checked>
+                        <label for="auto-scroll">Auto-Scroll to Latest Message</label>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="enable-search">
+                        <label for="enable-search">Enable Search in Conversations</label>
+                    </div>
+                </div>
+
+                <div class="preference-group">
+                    <h3>Privacy & Behavior</h3>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="clear-on-close">
+                        <label for="clear-on-close">Clear Chat on Extension Close</label>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="notify-updates" checked>
+                        <label for="notify-updates">Notify About Extension Updates</label>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="enable-analytics">
+                        <label for="enable-analytics">Allow Usage Analytics (Anonymous)</label>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="send-crash-reports" checked>
+                        <label for="send-crash-reports">Send Crash Reports</label>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="save-preferences" class="btn btn-primary">Save Preferences</button>
+                    <button id="reset-preferences" class="btn btn-secondary">Reset to Defaults</button>
+                </div>
+            </section>
+
+            <!-- Extension Configuration Tab -->
+            <section id="extension" class="tab-content">
+                <h2>Extension Configuration</h2>
+                <p class="section-description">Advanced settings for extension behavior and integrations.</p>
+
+                <div class="config-group">
+                    <h3>Default Behavior</h3>
+
+                    <div class="form-group">
+                        <label for="default-provider">Default LLM Provider</label>
+                        <select id="default-provider">
+                            <option value="openai">OpenAI</option>
+                            <option value="anthropic">Anthropic</option>
+                            <option value="gemini">Google Gemini</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="enable-context-menu" checked>
+                        <label for="enable-context-menu">Enable Right-Click Context Menu</label>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="enable-shortcuts" checked>
+                        <label for="enable-shortcuts">Enable Keyboard Shortcuts</label>
+                    </div>
+                </div>
+
+                <div class="config-group">
+                    <h3>Keyboard Shortcuts</h3>
+                    <p class="section-description">Configure custom keyboard shortcuts for quick access.</p>
+
+                    <div class="form-group">
+                        <label for="open-extension-shortcut">Open Extension</label>
+                        <input type="text" id="open-extension-shortcut" class="shortcut-input" placeholder="e.g., Alt+Shift+C" readonly>
+                        <small>Click to customize (Not yet implemented)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="send-message-shortcut">Send Message</label>
+                        <input type="text" id="send-message-shortcut" class="shortcut-input" placeholder="e.g., Ctrl+Enter" readonly>
+                        <small>Click to customize (Not yet implemented)</small>
+                    </div>
+                </div>
+
+                <div class="config-group">
+                    <h3>Data & Storage</h3>
+
+                    <div class="form-group">
+                        <label for="storage-location">Conversation Storage</label>
+                        <select id="storage-location">
+                            <option value="local" selected>Local Storage (This Device)</option>
+                            <option value="cloud">Cloud Storage (Requires Sync)</option>
+                            <option value="both">Both Local and Cloud</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="enable-backup" checked>
+                        <label for="enable-backup">Auto-Backup Conversations</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="backup-frequency">Backup Frequency</label>
+                        <select id="backup-frequency">
+                            <option value="daily" selected>Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="config-group">
+                    <h3>Advanced Options</h3>
+
+                    <div class="form-group">
+                        <label for="api-timeout">API Request Timeout (seconds)</label>
+                        <input type="number" id="api-timeout" min="5" max="120" value="30" class="number-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="max-tokens">Default Max Tokens</label>
+                        <input type="number" id="max-tokens" min="100" max="4000" value="2000" class="number-input">
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="enable-debug-mode">
+                        <label for="enable-debug-mode">Enable Debug Mode (Console Logs)</label>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="save-config" class="btn btn-primary">Save Configuration</button>
+                    <button id="reset-config" class="btn btn-secondary">Reset to Defaults</button>
+                    <button id="export-config" class="btn btn-secondary">Export Settings</button>
+                    <button id="import-config" class="btn btn-secondary">Import Settings</button>
+                </div>
+
+                <input type="file" id="config-file-input" accept=".json" style="display: none;">
+            </section>
+
+            <!-- About Tab -->
+            <section id="about" class="tab-content">
+                <h2>About LLM Conversation Manager</h2>
+
+                <div class="about-content">
+                    <div class="info-card">
+                        <h3>Version Information</h3>
+                        <p><strong>Extension Version:</strong> <span id="version">1.0.0</span></p>
+                        <p><strong>Last Updated:</strong> <span id="last-updated">2025-12-31</span></p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Supported Providers</h3>
+                        <ul>
+                            <li>✓ OpenAI (GPT-4, GPT-3.5 Turbo)</li>
+                            <li>✓ Anthropic (Claude 3 Series)</li>
+                            <li>✓ Google Gemini</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Features</h3>
+                        <ul>
+                            <li>✓ Multi-provider support</li>
+                            <li>✓ Conversation history management</li>
+                            <li>✓ Markdown rendering</li>
+                            <li>✓ Code syntax highlighting</li>
+                            <li>✓ Local storage with auto-backup</li>
+                            <li>✓ Customizable keyboard shortcuts</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Links & Resources</h3>
+                        <ul>
+                            <li><a href="https://github.com/yoshi933/llm-conversation-manager" target="_blank">📝 GitHub Repository</a></li>
+                            <li><a href="https://github.com/yoshi933/llm-conversation-manager/issues" target="_blank">🐛 Report Issues</a></li>
+                            <li><a href="https://github.com/yoshi933/llm-conversation-manager/wiki" target="_blank">📚 Documentation</a></li>
+                            <li><a href="#" id="privacy-policy" target="_blank">🔒 Privacy Policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Permissions Used</h3>
+                        <ul>
+                            <li>📦 Storage: Store conversations and settings locally</li>
+                            <li>🌐 Network: Send requests to LLM provider APIs</li>
+                            <li>📋 Tabs: Access selected text from web pages</li>
+                            <li>🔔 Notifications: Notify about events and updates</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Status Message -->
+        <div id="status-message" class="status-message hidden"></div>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+</html>
