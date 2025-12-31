@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "LLM Conversation Manager",
+  "version": "1.0.0",
+  "description": "A Chrome extension to manage and organize LLM conversations across web applications",
+  "permissions": [
+    "storage",
+    "scripting",
+    "webRequest",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "src/background/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content-scripts/injector.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content-scripts/conversation-handler.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "assets/icons/icon-16.png",
+      "48": "assets/icons/icon-48.png",
+      "128": "assets/icons/icon-128.png"
+    },
+    "default_title": "LLM Conversation Manager"
+  },
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["src/content-scripts/injected.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "action_default_popup": "src/popup/popup.html"
+}
